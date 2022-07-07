@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'page/announcement_page.dart';
 import 'page/home_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class HomePage extends StatefulWidget {
@@ -10,21 +11,17 @@ final zoomDrawerController;
 }
 
 class _HomePageState extends State<HomePage> {
-  
   int _tabIndex = 0;
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-        
       body: IndexedStack(
         index: _tabIndex,
         children: [
           Container(child: homePage1(),),
-          Center(child: Text("Setting"),),
-          Center(child: Text("About"),),
-          Center(child: Text("Call"),),
+          Center(child: AnnouncementPage(),),
+          Center(child: Text("Notification"),),
+          Center(child: Text("Contact"),),
         ],
       ),
       drawer: Drawer(
@@ -108,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       leading:  Icon(Icons.logout, color: Color(0xFFc8a648),),
                       title:  Text("Logout", style: TextStyle(color: Colors.grey)),
                       onTap: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginPage()));
                       }
                     ),
                   ],
@@ -128,7 +125,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: 5,)
                   ],
-                ))
+                )
+              )
             ],
           ),
         ),

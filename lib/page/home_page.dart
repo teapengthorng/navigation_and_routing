@@ -134,7 +134,7 @@ class _homePage1State extends State<homePage1> {
                       leading:  Icon(Icons.logout, color: Color(0xFFc8a648),),
                       title:  Text("Logout", style: TextStyle(color: Colors.grey)),
                       onTap: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginPage()));
                       }
                     ),
                   ],
@@ -236,11 +236,16 @@ class _homePage1State extends State<homePage1> {
                       childAspectRatio: 1.1,
                       crossAxisSpacing: 0.1,   
                       children: List.generate(choices.length, (index) {  
-                         return Padding(
-                           padding: EdgeInsets.only(top: 27),
-                           child: Center(  
-                            child: SelectCard(choice: choices[index]),  
-                        ),
+                         return InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                          },
+                           child: Padding(
+                             padding: EdgeInsets.only(top: 27),
+                             child: Center(  
+                              child: SelectCard(choice: choices[index]),  
+                                                 ),
+                           ),
                          );  
                        }
                       )
@@ -277,7 +282,7 @@ class _homePage1State extends State<homePage1> {
               heightFactor: 2,
               child: TextButton(
                 onPressed: (){},
-                child: Text("🤍", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w600),),
+                child: Text("🤍", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
               ),
             )),
             Positioned(
@@ -293,7 +298,6 @@ class _homePage1State extends State<homePage1> {
       ),
     );
   }
-
 }
 
  class Choice {  

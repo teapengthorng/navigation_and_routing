@@ -341,7 +341,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                        child: Image.asset("assets/30%.jpg")
                    ),
                    Container(
-                       child: Text("INSTANT 25% DISCOUNT")
+                       child: Text("INSTANT 25% DISCOUNTs")
                    ),
                    Container(
                        child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022")

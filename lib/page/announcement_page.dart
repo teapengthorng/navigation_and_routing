@@ -6,10 +6,13 @@ class AnnouncementPage extends StatefulWidget {
   @override
   _AnnouncementPageState createState() => _AnnouncementPageState();
 }
-
+enum menuitem { item1, item2, item3, item4 }
 class _AnnouncementPageState extends State<AnnouncementPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _tabIndex = 0;
+  menuitem? _mitem = menuitem.item1;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,6 +143,12 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
         child: Column(
           children: [
             buildtextfield(),
+            Expanded(
+              child: Container(
+                height: 900,
+                child: buildListView(),
+              ),
+            )
           ],
         ),
       ),
@@ -204,83 +213,146 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
       ),
     );
   }
-
   showDataAlert() {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  10
-                ),
+      return Dialog(
+        backgroundColor: Colors.grey[200],
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: ListView(
+          children: [
+            Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  ListTile(
+//                    minVerticalPadding: 20,
+                    title: const Text('Select Business Type...'),
+                    trailing: Radio<menuitem>(
+                      activeColor: Colors.green,
+                      value: menuitem.item1,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('Baby Shop'),
+                    trailing: Radio<menuitem>(
+                      value: menuitem.item2,
+                      activeColor: Colors.green,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('Bakery'),
+                    trailing: Radio<menuitem>(
+                      activeColor: Colors.green,
+                      value: menuitem.item3,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('Book Center/Library'),
+                    trailing: Radio<menuitem>(
+                      activeColor: Colors.green,
+                      value: menuitem.item4,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+
+                ],
               ),
-            ),
-            contentPadding: EdgeInsets.all(10
+            )
+          ],
+        ),
+      );
+    });
+  }
 
-            ),
-
-            content: Container(
-              color: Colors.green,
-              height: 400,
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(2),
+  Widget  buildListView(){
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                height: 500,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
+                  children: [
                     Container(
-                      child: Row(
-
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Text("Select Business Type.."),
-                          ),
-                          Container(
-                            child: Icon(Icons.circle),
-                          ),
-                        ],
-                      ),
+                        child: Image.asset("assets/25%.jpg")
                     ),
-//                    SizedBox(child: Container(color: Colors.grey,height: 1,),),
                     Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Text("Select Business Type.."),
-                          ),
-                          Container(
-                            child: Icon(Icons.circle),
-                          ),
-                        ],
-                      ),
+                        child: Text("INSTANT 25% DISCOUNT")
                     ),
-//                    SizedBox(child: Container(color: Colors.grey,height: 1,),),
                     Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Text("Select Business Type.."),
-                          ),
-                          Container(
-                            child: Icon(Icons.circle),
-                          ),
-                        ],
-                      ),
+                        child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022")
                     ),
-//                    SizedBox(child: Container(color: Colors.grey,height: 1,),),
-
-
                   ],
                 ),
               ),
-            ),
-          );
-        });
+             Container(
+                 color: Colors.white,
+                 height: 700,
+               child:  Column(
+                 children: [
+                   Container(
+                       child: Image.asset("assets/30%.jpg")
+                   ),
+                   Container(
+                       child: Text("INSTANT 25% DISCOUNT")
+                   ),
+                   Container(
+                       child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022")
+                   ),
+                 ],
+               ),
+             )
+            ],
+          ),
+        ),
+      )
+    );
   }
 }

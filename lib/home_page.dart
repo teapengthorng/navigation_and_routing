@@ -3,6 +3,8 @@ import 'login_page.dart';
 import 'page/announcement_page.dart';
 import 'page/home_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'page/notification_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key, this.zoomDrawerController }) : super(key: key);
 final zoomDrawerController;
@@ -20,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(child: homePage1(),),
           Center(child: AnnouncementPage(),),
-          Center(child: Text("Notification"),),
+          Center(child: NotificationPage(),),
           Center(child: Text("Contact"),),
         ],
       ),

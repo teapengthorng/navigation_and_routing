@@ -12,21 +12,18 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
   int _tabIndex = 0;
   menuitem? _mitem = menuitem.item1;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         backgroundColor:  Color(0Xff153250),
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: IconButton(icon: Icon(Icons.notes_rounded,size: 40,),
-              onPressed:(){
-                _scaffoldKey.currentState!.openDrawer();
-              }
-          ),
+        leading: IconButton(icon: Icon(Icons.notes_rounded,size: 40,),
+            onPressed:(){
+              _scaffoldKey.currentState!.openDrawer();
+            }
         ),
         title: Text("PROMOTION"),
         actions: [
@@ -39,102 +36,104 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
           color: Color(0Xff153250),
           child: Column(
             children: [
-              Container(
-                  child:Stack(
-                    children: [
-                      Container(
-                        height: 120,
-                        color:  Color(0Xff122134),),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(16, 40, 16, 0),
-                          child: Row(
+            Container(
+              child:Stack(
+                children: [
+                  Container(
+                    height: 120,
+                    color:  Color(0Xff122134),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16, 40, 16, 0),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage('assets/pengthorng.jpg'),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: AssetImage('assets/pengthorng.jpg'),
-                                ),
+                                child: Text("ID: 18493" , style: TextStyle(color: Color(0xFFad843c), fontSize: 16),),
                               ),
+                              SizedBox(height: 2,),
                               Container(
-                                  padding: EdgeInsets.only(left: 16),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Text("ID: 18493" , style: TextStyle(color: Color(0xFFad843c), fontSize: 16),),
-                                      ),
-                                      SizedBox(height: 2,),
-                                      Container(
-                                        child: Text("Ext: 09113" , style: TextStyle(color: Colors.white, fontSize: 16),),
-                                      ),
-                                    ],
-                                  )
-                              )
+                                child: Text("Ext: 09113" , style: TextStyle(color: Colors.white, fontSize: 16),),
+                              ),
                             ],
                           )
-                      ),
-                    ],
-                  )
-              ),
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.home_outlined, color: Color(0xFFc8a648),),
-                      title: Text("Home", style: TextStyle(color: _tabIndex == 0 ? Colors.white :  Colors.grey),),
+                        )
+                      ],
+                    )
+                  ),
+                ],
+              )
+            ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.home_outlined, color: Color(0xFFc8a648),),
+                    title: Text("Home", style: TextStyle(color: _tabIndex == 0 ? Colors.white :  Colors.grey),),
+                    onTap: () {
+                      setState(() {
+                        _tabIndex = 0;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings_outlined, color: Color(0xFFc8a648),),
+                    title: Text("Setting", style: TextStyle(color: _tabIndex == 1 ? Colors.white :  Colors.grey),),
+                    onTap: () {
+                      setState(() {
+                        _tabIndex = 1;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                      leading:  Icon(Icons.person_outlined, color: Color(0xFFc8a648),),
+                      title:  Text("About", style: TextStyle(color: _tabIndex == 2 ? Colors.white :  Colors.grey),),
                       onTap: () {
                         setState(() {
-                          _tabIndex = 0;
+                          _tabIndex = 2;
                         });
                         Navigator.of(context).pop();
-                      },
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.settings_outlined, color: Color(0xFFc8a648),),
-                      title: Text("Setting", style: TextStyle(color: _tabIndex == 1 ? Colors.white :  Colors.grey),),
+                      }
+                  ),
+                  ListTile(
+                      leading:  Icon(Icons.logout, color: Color(0xFFc8a648),),
+                      title:  Text("Logout", style: TextStyle(color: Colors.grey)),
                       onTap: () {
-                        setState(() {
-                          _tabIndex = 1;
-                        });
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    ListTile(
-                        leading:  Icon(Icons.person_outlined, color: Color(0xFFc8a648),),
-                        title:  Text("About", style: TextStyle(color: _tabIndex == 2 ? Colors.white :  Colors.grey),),
-                        onTap: () {
-                          setState(() {
-                            _tabIndex = 2;
-                          });
-                          Navigator.of(context).pop();
-                        }
-                    ),
-                    ListTile(
-                        leading:  Icon(Icons.logout, color: Color(0xFFc8a648),),
-                        title:  Text("Logout", style: TextStyle(color: Colors.grey)),
-                        onTap: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginPage()));
-                        }
-                    ),
-                  ],
-                ),
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginPage()));
+                      }
+                  ),
+                ],
               ),
+            ),
               Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Text("Version 5.54 ", style: TextStyle(color: Colors.grey),),
-                      ),
-                      Container(
-                        child: Text(" Released Date: June 13 2022 ", style: TextStyle(color: Colors.grey),),
-                      ),
-                      Container(
-                        child: Text(" Ypur ACLEDA mobile version is up to date", style: TextStyle(color: Colors.grey),),
-                      ),
-                      SizedBox(height: 5,)
-                    ],
-                  ))
+                child: Column(
+                  children: [
+                    Container(
+                      child: Text("Version 5.54 ", style: TextStyle(color: Colors.grey),),
+                    ),
+                    Container(
+                      child: Text(" Released Date: June 13 2022 ", style: TextStyle(color: Colors.grey),),
+                    ),
+                    Container(
+                      child: Text(" Ypur ACLEDA mobile version is up to date", style: TextStyle(color: Colors.grey),),
+                    ),
+                    SizedBox(height: 5,)
+                  ],
+                )
+              )
             ],
           ),
         ),
@@ -144,10 +143,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
           children: [
             buildtextfield(),
             Expanded(
-              child: Container(
-                height: 900,
-                child: buildListView(),
-              ),
+              child: buildListView(),
             )
           ],
         ),
@@ -176,25 +172,24 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                 label: Text("Search partner..."),
                 prefixIcon: Icon(Icons.search),
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(1)),
-                  )
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(1)),
+                )
               ),
             )
           ),
           SizedBox(height: 5,),
           Container(
             height: 50,
-//            color: Colors.black12,
             margin: EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-               color: Colors.white,
-                border: Border.all(
-                    color: Colors.black, width: 1),
-                ),
+             color: Colors.white,
+            border: Border.all(
+              color: Colors.black, width: 1),
+            ),
             child: TextButton(
               onPressed: () {
-                  showDataAlert();
+                showDataAlert();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,7 +215,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
       return Dialog(
         backgroundColor: Colors.grey[200],
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
         child: ListView(
           children: [
             Container(
@@ -232,7 +227,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
                   ListTile(
-//                    minVerticalPadding: 20,
+//                   minVerticalPadding: 20,
                     title: const Text('Select Business Type...'),
                     trailing: Radio<menuitem>(
                       activeColor: Colors.green,
@@ -262,12 +257,12 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                       },
                     ),
                   ),
-                  const Divider(
+                   Divider(
                     thickness: 1,
                     color: Colors.grey,
                   ),
                   ListTile(
-                    title: const Text('Bakery'),
+                    title:  Text('Bakery'),
                     trailing: Radio<menuitem>(
                       activeColor: Colors.green,
                       value: menuitem.item3,
@@ -296,7 +291,6 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                       },
                     ),
                   ),
-
                 ],
               ),
             )
@@ -308,50 +302,52 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
   Widget  buildListView(){
     return SingleChildScrollView(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                color: Colors.white,
-                height: 500,
-                child: Column(
-                  children: [
-                    Container(
-                        child: Image.asset("assets/25%.jpg")
-                    ),
-                    Container(
-                        child: Text("INSTANT 25% DISCOUNT")
-                    ),
-                    Container(
-                        child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022")
-                    ),
-                  ],
+      child: Column(
+
+        children: <Widget>[
+          Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/25%.jpg")
                 ),
-              ),
-             Container(
-                 color: Colors.white,
-                 height: 700,
-               child:  Column(
-                 children: [
-                   Container(
-                       child: Image.asset("assets/30%.jpg")
-                   ),
-                   Container(
-                       child: Text("INSTANT 25% DISCOUNT")
-                   ),
-                   Container(
-                       child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022")
-                   ),
-                 ],
-               ),
-             )
-            ],
+                SizedBox(height: 10,),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  alignment: Alignment.topLeft,
+                    child: Text("INSTANT 25% DISCOUNT", style: TextStyle(color: Colors.blue[700]),)
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 16,right: 16, bottom: 16),
+                  child: Text("Enjoy instant 25% discount for your payments with ACLEDA QR through ACLEDA mobile at Le Seoul Restaurant from June 10, 2022 to July 10, 2022",style: TextStyle(fontSize: 16.6),)
+                ),
+              ],
+            ),
           ),
-        ),
+           SizedBox(height: 10,),
+          Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/30%.jpg")
+                ),
+                SizedBox(height: 10,),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  alignment: Alignment.topLeft,
+                  child: Text("INSTANT 30% DISCOUNT", style: TextStyle(color: Colors.blue[700]),)
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 16,right: 16, bottom: 16),
+                  child: Text("Get instant 30% off for your payments with ACLEDA QR through ACLEDA mobile at BROWN Coffee and Bakery from June 13, 2022 to July 13, 2022", style: TextStyle(fontSize: 16.6),)
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
+        ],
       )
     );
   }

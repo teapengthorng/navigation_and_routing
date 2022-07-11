@@ -22,11 +22,11 @@ class _homePage1State extends State<homePage1> {
     controller = PageController();
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+//  @override
+//  void dispose() {
+//    controller.dispose();
+//    super.dispose();
+//  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

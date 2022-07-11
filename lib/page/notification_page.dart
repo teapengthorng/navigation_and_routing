@@ -142,7 +142,7 @@ class _NotificationPageState extends State<NotificationPage> {
             Container(
             color: Colors.green,
             width: 300,
-            child: Center(child: Text("desktop"),)
+            child: Center(child: Text("desktop"),),
           ),
           Expanded(
             child: Container(

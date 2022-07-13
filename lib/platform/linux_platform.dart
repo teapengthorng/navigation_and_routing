@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class LinuxPlatform extends StatelessWidget {
+class TabletPlatform extends StatelessWidget {
    double? width; double? height;
-   LinuxPlatform(this.width, this.height,);
+   TabletPlatform(this.width, this.height,);
    @override
    Widget build(BuildContext context) {
    return Container(

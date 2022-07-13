@@ -14,6 +14,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
   bool changeIcon = true;
   late PageController controller;
   GlobalKey<PageContainerState> key = GlobalKey();
+  width(BuildContext context) => MediaQuery.of(context).size.width;
   bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 600;
 
   @override
@@ -218,7 +219,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
       child: Expanded(
         child:
         Container(
-          height:isDesktop(context) != true ? 370 : 160,
+          height:isDesktop(context) != true ? 440 : 180,
           child: PageIndicatorContainer(
             indicatorColor: Colors.grey,
             indicatorSelectorColor: Colors.white,
@@ -259,7 +260,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
 //                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
                             },
                             child: Padding(
-                              padding: EdgeInsets.only(top: 27),
+                              padding: EdgeInsets.only(top: 40),
                               child: Center(
                                 child: SelectCard(choice: choices[index]),
                               ),
@@ -297,7 +298,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
                     child: isDesktop(context) != true ? Image.asset("assets/New Project.png",) : Image.asset("assets/10000X800.png", ),
                   )),
               Positioned(
-                  left: isDesktop(context) != true ? 245 : 420 ,
+                  left: isDesktop(context) != true ? width(context)/1.6 : width(context)/2 ,
                   child: Center(
                     heightFactor:isDesktop(context) != true ? 2 : 0.5,
                     child: TextButton(

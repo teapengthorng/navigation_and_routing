@@ -23,7 +23,7 @@ class _homePage1State extends State<homePage1> {
     final screen = MediaQuery.of(context).size;
      if (!kIsWeb && Platform.isLinux)
      {
-     return LinuxPlatform(screen.width,screen.height);
+     return TabletPlatform(screen.width,screen.height);
      } else if (!kIsWeb && Platform.isWindows) {
      return WindowPlatform(screen.width,screen.height);
      } else if (!kIsWeb && Platform.isIOS) {

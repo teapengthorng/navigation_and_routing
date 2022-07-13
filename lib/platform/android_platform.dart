@@ -298,7 +298,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
                     child: isDesktop(context) != true ? Image.asset("assets/New Project.png",) : Image.asset("assets/10000X800.png", ),
                   )),
               Positioned(
-                  left: isDesktop(context) != true ? width(context)/1.6 : width(context)/2 ,
+                  left: isDesktop(context) != true ? width(context)/1.6 : width(context)/1.84 ,
                   child: Center(
                     heightFactor:isDesktop(context) != true ? 2 : 0.5,
                     child: TextButton(

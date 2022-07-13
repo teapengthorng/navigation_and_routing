@@ -10,9 +10,10 @@ class WebPlatForm extends StatefulWidget {
 class _WebPlatFormState extends State<WebPlatForm> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _tabIndex = 0;
-
+  bool changeIcon = true;
   late PageController controller;
   GlobalKey<PageContainerState> key = GlobalKey();
+  bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 1000;
 
   @override
   void initState() {
@@ -25,17 +26,17 @@ class _WebPlatFormState extends State<WebPlatForm> {
         key: _scaffoldKey,
         backgroundColor:   Color(0Xff153250),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(110),
+          preferredSize: isDesktop(context) != true ? Size.fromHeight(110) : Size.fromHeight(80) ,
           child: Center(
             child: Padding(
-              padding: EdgeInsets.only(top: 30),
+              padding:isDesktop(context) != true ?  EdgeInsets.only(top: 30): EdgeInsets.only(top: 15),
               child: AppBar(
                   backgroundColor:  Color(0Xff153250),
                   centerTitle: true,
-                  title: Center(child: Image.asset("assets/logo3.png",scale: 3)),
+                  title: Center(child:  isDesktop(context) != true ? Image.asset( "assets/logo3.png", scale: 3) : Image.asset( "assets/logo3.png", scale: 3.5)),
                   leading: Padding(
                     padding: const EdgeInsets.only(left: 16),
-                    child: IconButton(icon: Icon(Icons.notes_rounded,size: 40,),
+                    child: IconButton(icon: isDesktop(context) != true ? Icon(Icons.notes_rounded,size: 40,) : Icon(Icons.notes_rounded,size: 40,),
                         onPressed:(){
                           _scaffoldKey.currentState!.openDrawer();
                         }
@@ -166,7 +167,7 @@ class _WebPlatFormState extends State<WebPlatForm> {
   Widget buildbuttonbar(){
     return Container(
       child: SizedBox(
-        height: 50,
+        height:isDesktop(context) != true ? 50 : 30,
         child: ElevatedButton(
             onPressed: (){},
             style: ElevatedButton.styleFrom(
@@ -214,37 +215,63 @@ class _WebPlatFormState extends State<WebPlatForm> {
     return Container(
       color: Color(0Xff153250),
       child: Expanded(
-        child: Container(
-          height: 300,
+        child:
+        Container(
+          height:isDesktop(context) != true ? 370 : 430,
           child: PageIndicatorContainer(
             indicatorColor: Colors.grey,
             indicatorSelectorColor: Colors.white,
             key: key,
             child: PageView(
               children: [
-                Container(
-                  child: GridView.count(
-                      crossAxisCount: 5,
-                      childAspectRatio: 2,
-                      crossAxisSpacing: 1,
-                      children: List.generate(choices.length, (index) {
-                        return InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 27),
-                            child: Center(
-                              child: SelectCard(choice: choices[index]),
-                            ),
-                          ),
-                        );
-                      }
-                      )
+                if(isDesktop(context))
+                  Container(
+                    child: GridView.count(
+                        crossAxisCount: 3,
+                        childAspectRatio: 3.5,
+                        crossAxisSpacing: 2,
+                        children: List.generate(choices.length, (index) {
+                          return InkWell(
+                            onTap: (){
+//                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only( top: 20),
+                              child: Center(
+                                child:
+        SelectCard(choice: choices[index]),
+      ),
+    ),
+    );
+  }
+  )
+  ),    )else
+                  Expanded(
+                    child: Container(
+                      child: GridView.count(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.4,
+                          crossAxisSpacing: 0.1,
+                          children: List.generate(choices.length, (index) {
+                            return InkWell(
+                              onTap: (){
+//                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 27),
+                                child: Center(
+                                  child: SelectCard(choice: choices[index]),
+                                ),
+                              ),
+                            );
+                          }
+                          )
+                      ),
+                    ),
                   ),
-                ),
+
                 Container(
-                  child: Center(child: Text("Web", style: TextStyle(color: Colors.white, fontSize: 30),)),
+                  child: Center(child: Text("Android", style: TextStyle(color: Colors.white, fontSize: 30),)),
                 )
               ],
               controller: controller,
@@ -252,7 +279,7 @@ class _WebPlatFormState extends State<WebPlatForm> {
             ),
             // align: IndicatorAlign.bottom,
             length: 2,
-            indicatorSpace: 5,
+            indicatorSpace: 1,
           ),
         ),
       ),
@@ -261,22 +288,20 @@ class _WebPlatFormState extends State<WebPlatForm> {
   Widget buildimage(){
     return Expanded(
       child: Container(
-//          alignment: Alignment.bottomCenter,
+          alignment: Alignment.bottomCenter,
           child: Stack(
             children: [
-              Expanded(
-                child: Container(
-                  width: double.maxFinite,
-                  child: Image.asset("assets/New Project.png",),
-                ),
-              ),
               Positioned(
-                  left: 245,
+                  child: Container(
+                    child: isDesktop(context) != true ? Image.asset("assets/3000X664.png",) : Image.asset("assets/10000X800.png", ),
+                  )),
+              Positioned(
+                  left: isDesktop(context) != true ? 300 : 810 ,
                   child: Center(
-                    heightFactor: 2,
+                    heightFactor:isDesktop(context) != true ? 3 : 3,
                     child: TextButton(
                       onPressed: (){},
-                      child: Text("🤍", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
+                      child: Text("🤍", style: isDesktop(context) != true ? TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600) : TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                     ),
                   )),
               Positioned(
@@ -284,7 +309,7 @@ class _WebPlatFormState extends State<WebPlatForm> {
                     heightFactor: 4,
                     child: TextButton(
                       onPressed: (){},
-                      child: Text("FAVORITES", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600),),
+                      child: Text("FAVORITES", style: isDesktop(context) != true ?  TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600) : TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w600),),
                     ),
                   ))
             ],
@@ -311,17 +336,44 @@ List<Choice> choices = [
   Choice(title: 'REQUESTS', icon: FontAwesomeIcons.penToSquare),
   Choice(title: 'QUICK CASH', icon: FontAwesomeIcons.sackDollar),
 ];
-class SelectCard extends StatelessWidget {
+class SelectCard extends StatefulWidget {
   const SelectCard({ Key? key, this.choice }) : super(key: key);
   final Choice? choice;
+
+  @override
+  State<SelectCard> createState() => _SelectCardState();
+}
+
+class _SelectCardState extends State<SelectCard> {
+  bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 600;
   @override
   Widget build(BuildContext context) {
     return Center(child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(choice!.icon, size:50.0, color: Colors.white),
-          SizedBox(height: 5,),
-          Text(choice!.title!,style: TextStyle(color: Colors.white),),
+          if(isDesktop(context))
+            Container(
+              child: Column(
+                children: [
+                  Icon( widget.choice!.icon, size:50.0, color: Colors.white),
+                  SizedBox(height: 5,),
+                  Text(widget.choice!.title!,style: TextStyle(color: Colors.white),)
+                ],
+              ),
+            )else
+            Expanded(
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon( widget.choice!.icon, size:50.0, color: Colors.white),
+                      SizedBox(height: 5,),
+                      Text(widget.choice!.title!,style: TextStyle(color: Colors.white),)
+                    ],
+                  ),
+                )
+            )
+
+
         ]
     ),
     );

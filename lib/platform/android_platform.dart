@@ -24,24 +24,20 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         key: _scaffoldKey,
         backgroundColor:   Color(0Xff153250),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(110),
-
+          preferredSize: isDesktop(context) != true ? Size.fromHeight(110) : Size.fromHeight(60) ,
           child: Center(
-
             child: Padding(
-
-              padding: EdgeInsets.only(top: 30),
+              padding:isDesktop(context) != true ?  EdgeInsets.only(top: 30): EdgeInsets.only(top: 15),
               child: AppBar(
                   backgroundColor:  Color(0Xff153250),
                   centerTitle: true,
-                  title: Center(child: Image.asset("assets/logo3.png",scale: 3)),
+                  title: Center(child:  isDesktop(context) != true ? Image.asset( "assets/logo3.png", scale: 3) : Image.asset( "assets/logo3.png", scale: 6)),
                   leading: Padding(
                     padding: const EdgeInsets.only(left: 16),
-                    child: IconButton(icon: Icon(Icons.notes_rounded,size: 40,),
+                    child: IconButton(icon: isDesktop(context) != true ? Icon(Icons.notes_rounded,size: 40,) : Icon(Icons.notes_rounded,size: 30,),
                         onPressed:(){
                           _scaffoldKey.currentState!.openDrawer();
                         }
@@ -171,12 +167,8 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
 
   Widget buildbuttonbar(){
     return Container(
-
-      child:
-
-
-      SizedBox(
-        height: 50,
+      child: SizedBox(
+        height:isDesktop(context) != true ? 50 : 25,
         child: ElevatedButton(
             onPressed: (){},
             style: ElevatedButton.styleFrom(
@@ -185,7 +177,6 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-
                 Container(
                   child: Text("EXCHANGE RATE"),
                 ),
@@ -222,13 +213,12 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
     );
   }
   Widget buildviewpage(){
-
     return Container(
       color: Color(0Xff153250),
       child: Expanded(
         child:
         Container(
-          height: 370,
+          height:isDesktop(context) != true ? 370 : 160,
           child: PageIndicatorContainer(
             indicatorColor: Colors.grey,
             indicatorSelectorColor: Colors.white,
@@ -237,18 +227,17 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
               children: [
                 if(isDesktop(context))
                   Container(
-                    height: 200,
                     child: GridView.count(
                         crossAxisCount: 5,
-                        childAspectRatio: 1.5,
-                        crossAxisSpacing: 3,
+                        childAspectRatio: 1.8,
+                        crossAxisSpacing: 2,
                         children: List.generate(choices.length, (index) {
                           return InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+//                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
                             },
                             child: Padding(
-                              padding: EdgeInsets.only(top: 27),
+                              padding: EdgeInsets.only( top: 7),
                               child: Center(
                                 child: SelectCard(choice: choices[index]),
                               ),
@@ -267,7 +256,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
                         children: List.generate(choices.length, (index) {
                           return InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+//                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
                             },
                             child: Padding(
                               padding: EdgeInsets.only(top: 27),
@@ -291,7 +280,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
             ),
             // align: IndicatorAlign.bottom,
             length: 2,
-            indicatorSpace: 5,
+            indicatorSpace: 1,
           ),
         ),
       ),
@@ -305,15 +294,15 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
             children: [
               Positioned(
                   child: Container(
-                    child: Image.asset("assets/New Project.png",),
+                    child: isDesktop(context) != true ? Image.asset("assets/New Project.png",) : Image.asset("assets/10000X800.png", ),
                   )),
               Positioned(
-                  left: 245,
+                  left: isDesktop(context) != true ? 245 : 420 ,
                   child: Center(
-                    heightFactor: 2,
+                    heightFactor:isDesktop(context) != true ? 2 : 0.5,
                     child: TextButton(
                       onPressed: (){},
-                      child: Text("🤍", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
+                      child: Text("🤍", style: isDesktop(context) != true ? TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600) : TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                     ),
                   )),
               Positioned(
@@ -321,7 +310,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
                     heightFactor: 4,
                     child: TextButton(
                       onPressed: (){},
-                      child: Text("FAVORITES", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600),),
+                      child: Text("FAVORITES", style: isDesktop(context) != true ?  TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600) : TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w600),),
                     ),
                   ))
             ],
@@ -348,17 +337,44 @@ List<Choice> choices = [
   Choice(title: 'REQUESTS', icon: FontAwesomeIcons.penToSquare),
   Choice(title: 'QUICK CASH', icon: FontAwesomeIcons.sackDollar),
 ];
-class SelectCard extends StatelessWidget {
+class SelectCard extends StatefulWidget {
   const SelectCard({ Key? key, this.choice }) : super(key: key);
   final Choice? choice;
+
+  @override
+  State<SelectCard> createState() => _SelectCardState();
+}
+
+class _SelectCardState extends State<SelectCard> {
+  bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 600;
   @override
   Widget build(BuildContext context) {
     return Center(child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(choice!.icon, size:50.0, color: Colors.white),
-          SizedBox(height: 5,),
-          Text(choice!.title!,style: TextStyle(color: Colors.white),),
+          if(isDesktop(context))
+            Container(
+             child: Column(
+               children: [
+                 Icon( widget.choice!.icon, size:30.0, color: Colors.white),
+                 SizedBox(height: 5,),
+                 Text(widget.choice!.title!,style: TextStyle(color: Colors.white),)
+               ],
+             ),
+            )else
+            Expanded(
+              child: Container(
+            child: Column(
+              children: [
+                Icon( widget.choice!.icon, size:50.0, color: Colors.white),
+                SizedBox(height: 5,),
+                Text(widget.choice!.title!,style: TextStyle(color: Colors.white),)
+                ],
+              ),
+            )
+            )
+
+
         ]
     ),
     );

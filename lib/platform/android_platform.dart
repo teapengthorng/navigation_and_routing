@@ -219,7 +219,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
       child: Expanded(
         child:
         Container(
-          height:isDesktop(context) != true ? 440 : 180,
+          height:isDesktop(context) != true ? 370 : 160,
           child: PageIndicatorContainer(
             indicatorColor: Colors.grey,
             indicatorSelectorColor: Colors.white,
@@ -260,7 +260,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
 //                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
                             },
                             child: Padding(
-                              padding: EdgeInsets.only(top: 40),
+                              padding: EdgeInsets.only(top: 27),
                               child: Center(
                                 child: SelectCard(choice: choices[index]),
                               ),
@@ -271,7 +271,6 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
                     ),
                   ),
                 ),
-
                 Container(
                   child: Center(child: Text("Android", style: TextStyle(color: Colors.white, fontSize: 30),)),
                 )
@@ -294,6 +293,7 @@ class _AndroidPlatformState extends State<AndroidPlatform> {
           child: Stack(
             children: [
               Positioned(
+//                bottom: 5,
                   child: Container(
                     child: isDesktop(context) != true ? Image.asset("assets/New Project.png",) : Image.asset("assets/10000X800.png", ),
                   )),

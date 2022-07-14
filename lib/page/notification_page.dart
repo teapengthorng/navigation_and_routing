@@ -8,12 +8,15 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _tabIndex = 0;
+  String descText = "Description Line 1\nDescription Line 2\nDescription Line 3\nDescription Line 4\nDescription Line 5\nDescription Line 6\nDescription Line 7\nDescription Line 8";
+  bool descTextShowFlag = false;
 
   bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 600;
 //  bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width < 600;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:  Colors.black12,
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor:  Color(0Xff153250),
@@ -136,23 +139,72 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ),
       ),
-      body: Row(
-        children: [
-          if(isDesktop(context))
-            Container(
-            color: Colors.green,
-            width: 300,
-            child: Center(child: Text("desktop"),),
-          )else
-          Expanded(
-            child: Container(
-              color: Colors.red,
-              width: 300,
-              child: Center(child: Text("phone"),),
-            ),
-          )
-        ],
+      body:  Container(
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10)
+        ),
+        margin: EdgeInsets.all(16.0),
+        child:  Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("rjegiregjeriogjiroejgiorioegjioregjiorejgorejgiorejgiytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjytjyjorejgiorejgioregij",
+            maxLines: descTextShowFlag ? 8 : 2,textAlign: TextAlign.start),
+        InkWell(
+          onTap: (){ setState(() {
+            descTextShowFlag = !descTextShowFlag;
+          }); },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              descTextShowFlag ? Text("Show Less",style: TextStyle(color: Colors.blue),) :  Text("Show More",style: TextStyle(color: Colors.blue))
+            ],
+          ),
+        ),
+          ],
+        ),
       ),
     );
   }
+  
 }
+
+class Notificationchoice{
+  Notificationchoice({this.icon, this.toptitle, this.bottomtitle, this.title, this.image  });
+  final IconData? icon;
+  final String? toptitle;
+  final String? bottomtitle;
+  final String? title;
+  final String? image;
+  
+}
+
+List<Notificationchoice> notificationchoices = [
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+  Notificationchoice(icon: Icons.shopping_cart_outlined, toptitle: 'PAYMENTS' , bottomtitle: 'PAYMENTS' , title: 'PAYMENTS' , image: 'PAYMENTS'  ),
+];
+//      body: Row(
+//        children: [
+//          if(isDesktop(context))
+//            Container(
+//            color: Colors.green,
+//            width: 300,
+//            child: Center(child: Text("desktop"),),
+//          )else
+//          Expanded(
+//            child: Container(
+//              color: Colors.red,
+//              width: 300,
+//              child: Center(child: Text("phone"),),
+//            ),
+//          )
+//        ],
+//      ),
+//    );
+//  }
+//}
